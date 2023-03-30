@@ -41,6 +41,10 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
 
       - name: Build and push Docker image
         id: build-and-push
@@ -49,6 +53,8 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            BOX_VERSION=${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-to: type=gha,mode=max
           cache-from: type=gha
