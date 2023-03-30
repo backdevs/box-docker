@@ -2,7 +2,7 @@ name: Tag with the latest Box version
 
 on:
   schedule:
-    - cron: '26 * * * *'
+    - cron: '35 * * * *'
 
 jobs:
   tag-and-release:
