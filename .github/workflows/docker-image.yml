@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    tags:
+      - "^[0-9]+.[0-9]+.[0-9]+$"
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get current git tag
+        id: tag
+        uses: devops-actions/action-get-tag@v1.0.1
+
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag backdevs/box:${{steps.tag.outputs.tag}}
