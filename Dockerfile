@@ -1,9 +1,11 @@
 FROM php:8.1-cli-alpine
 
+# This was the latest version at the time of the initial release of this image.
+# To find out the latest version, please look at the GitHub Releases section.
 ARG BOX_VERSION=4.3.8
 ENV BOX_VERSION=${BOX_VERSION}
 
-ARG COMPOSER_VERSION=2.5.5
+ARG COMPOSER_VERSION=2
 ENV COMPOSER_VERSION=${COMPOSER_VERSION}
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
