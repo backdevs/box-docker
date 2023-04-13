@@ -3,7 +3,7 @@ name: Bump version
 on:
   push:
     schedule:
-      - cron: "*/21 * * * *"
+      - cron: "*/30 * * * *"
 
 jobs:
 
@@ -27,7 +27,7 @@ jobs:
       - name: Bump version
         id: bump-version
         run: |
-          MESSAGE=$(./bump-version.sh "${{ steps.box.outputs.release }}
+          MESSAGE=$(./bump-version.sh "${{ steps.box.outputs.release }}")
           BUMPED=$(if [ $? -eq 0 ]; then echo 1; else echo 0; fi)
           echo "message=${MESSAGE}" >> $GITHUB_OUTPUT
           echo "bumped=${BUMPED}" >> $GITHUB_OUTPUT
