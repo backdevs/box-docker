@@ -23,4 +23,4 @@ LATEST_VERSIONS=$(jq --arg version "${LATEST_VERSION}" '.latest |= $version' "${
 
 echo "${LATEST_VERSIONS}" > "${VERSIONS_FILE}"
 
-echo "Update latest version from ${CURRENT_VERSION} to ${LATEST_VERSION}"
+echo "Bump latest version from ${CURRENT_VERSION} to ${LATEST_VERSION}"
