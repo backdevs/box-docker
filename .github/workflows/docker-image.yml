@@ -24,7 +24,7 @@ jobs:
 
       - name: Get the latest version
         id: latest_version
-        run: echo ::set-output name=VERSION::"$(jq -r '.latest' versions.json)"
+        run: echo "version=$(jq -r '.latest' versions.json)" >> $GITHUB_OUTPUT
 
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
@@ -43,9 +43,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}},value=${{ steps.latest_version.outputs.VERSION }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ steps.latest_version.outputs.VERSION }}
-            type=semver,pattern={{major}},value=${{ steps.latest_version.outputs.VERSION }}
+            type=semver,pattern={{version}},value=${{ steps.latest_version.outputs.version }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.latest_version.outputs.version }}
+            type=semver,pattern={{major}},value=${{ steps.latest_version.outputs.version }}
 
       - name: Build and push Docker image
         id: build-and-push
