@@ -28,6 +28,7 @@ jobs:
 
       - name: Bump version
         id: bump-version
+        continue-on-error: true
         run: |
           MESSAGE=$(./bump-version.sh "${{ steps.box.outputs.release }}")
           BUMPED=$(if [ $? -eq 0 ]; then echo 1; else echo 0; fi)
