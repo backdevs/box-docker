@@ -1,11 +1,11 @@
 FROM php:8.1-cli-alpine
 
 # This was the latest version at the time of the initial release of this image.
-# To find out the latest version, please look at the GitHub Releases section.
+# To find out the latest version, please check the versions.json file.
 ARG BOX_VERSION=4.3.8
 ENV BOX_VERSION=${BOX_VERSION}
 
-ARG COMPOSER_VERSION=2
+ARG COMPOSER_VERSION=2.5.5
 ENV COMPOSER_VERSION=${COMPOSER_VERSION}
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
@@ -22,11 +22,9 @@ RUN apk add --no-cache --virtual .runtime-deps \
       zip \
       bz2 \
     && docker-php-source delete \
-    && curl -LSs \
-      -o /usr/bin/composer \
+    && curl -o /usr/bin/composer \
       "https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar" \
-    && curl -LSs \
-      -o /usr/bin/box \
+    && curl -o /usr/bin/box \
       "https://github.com/box-project/box/releases/download/${BOX_VERSION}/box.phar" \
     && chmod +x /usr/bin/composer /usr/bin/box
 
