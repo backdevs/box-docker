@@ -1,0 +1,41 @@
+name: Bump version
+
+on:
+  push:
+    schedule:
+      - cron: "*/21 * * * *"
+
+jobs:
+
+  bump-version:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest Box version
+        id: box
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: box-project
+          repo: box
+          excludes: prerelease, draft
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Bump version
+        id: bump-version
+        run: |
+          MESSAGE=$(./bump-version.sh "${{ steps.box.outputs.release }}
+          BUMPED=$(if [ $? -eq 0 ]; then echo 1; else echo 0; fi)
+          echo "message=${MESSAGE}" >> $GITHUB_OUTPUT
+          echo "bumped=${BUMPED}" >> $GITHUB_OUTPUT
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        if: steps.bump-version.outputs.bumped == 1
+        with:
+          default_author: github_actions
+          message: ${{ steps.bump-version.outputs.message }}
+          add: versions.json
