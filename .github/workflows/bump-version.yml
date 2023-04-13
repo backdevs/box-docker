@@ -3,7 +3,7 @@ name: Bump version
 on:
   push:
     schedule:
-      - cron: "*/30 * * * *"
+      - cron: "*/5 * * * *"
 
 jobs:
 
@@ -23,6 +23,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
 
       - name: Bump version
         id: bump-version
