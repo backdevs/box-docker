@@ -22,9 +22,11 @@ RUN apk add --no-cache --virtual .runtime-deps \
       zip \
       bz2 \
     && docker-php-source delete \
-    && curl -o /usr/bin/composer \
+    && curl -Lf \
+      -o /usr/bin/composer \
       "https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar" \
-    && curl -o /usr/bin/box \
+    && curl -Lf \
+      -o /usr/bin/box \
       "https://github.com/box-project/box/releases/download/${BOX_VERSION}/box.phar" \
     && chmod +x /usr/bin/composer /usr/bin/box
 
