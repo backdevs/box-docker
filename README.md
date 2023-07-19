@@ -17,7 +17,7 @@ docker run -it --rm -v $(pwd):/app backdevs/box:latest compile
 ```
 This will mount the current working directory to the `/app` directory inside the container and run `box compile` inside that directory.
 
-For more advanced usages and configrations, please refer to the official [`box` configuration](https://github.com/box-project/box/blob/main/doc/configuration.md#configuration) documentation.
+For more advanced configuration options, please refer to the official [`box` configuration](https://github.com/box-project/box/blob/main/doc/configuration.md#configuration) documentation.
 
 ## Build
 
