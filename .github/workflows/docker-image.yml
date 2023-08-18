@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'versions.json'
+      - 'Dockerfile'
 
 env:
   REGISTRY: docker.io
