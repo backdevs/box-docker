@@ -1,4 +1,4 @@
-FROM php:8.3.10-cli-alpine
+FROM php:8.3.12-cli-alpine
 
 # This was the latest version at the time of the initial release of this image.
 # To find out the latest version, please check the versions.json file.
